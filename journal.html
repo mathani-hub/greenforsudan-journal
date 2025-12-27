@@ -21,7 +21,6 @@
         .gfs-border-green { border-color: #059669; }
         .gfs-green-darker { background-color: #047857; }
 
-        /* Smooth Mobile Menu */
         .mobile-menu-overlay {
             z-index: 50; 
             position: fixed;
@@ -45,12 +44,13 @@
             background: linear-gradient(90deg, #059669 0%, #047857 100%);
         }
 
-        .llm-button {
-            transition: all 0.3s ease;
-        }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+
+        .llm-button { transition: all 0.3s ease; }
         .llm-button:hover:not(:disabled) {
             box-shadow: 0 4px 15px rgba(5, 150, 105, 0.4);
-            transform: translateY(-2px);
+            transform: scale(1.02);
         }
         .llm-button:disabled {
             background-color: #cbd5e1;
@@ -67,9 +67,9 @@
             </a>
             
             <nav class="hidden lg:flex space-x-6 text-gray-700 uppercase text-sm font-bold">
-                <a href="index.html" class="hover:text-emerald-600 transition">Home</a>
-                <a href="https://green-for-sudan-about-us.netlify.app/" target="_blank" class="hover:text-emerald-600 transition">About Us</a>
-                <a href="our-team.html" class="hover:text-emerald-600 transition">Our Team</a>
+                <a href="index.html" class="hover:text-emerald-600">Home</a>
+                <a href="https://green-for-sudan-about-us.netlify.app/" target="_blank" class="hover:text-emerald-600">About Us</a>
+                <a href="our-team.html" class="hover:text-emerald-600">Our Team</a>
                 <a href="journal.html" class="gfs-text-green border-b-2 border-emerald-500">The Journal</a>
             </nav>
             
@@ -80,108 +80,154 @@
         </div>
     </header>
 
+    <div id="mobile-menu" class="mobile-menu-overlay lg:hidden">
+        <div class="p-4 flex justify-end">
+            <button id="mobile-menu-close"><i data-lucide="x" class="w-8 h-8"></i></button>
+        </div>
+        <nav class="flex flex-col space-y-6 px-10 mt-10 text-2xl font-bold">
+            <a href="index.html">Home</a>
+            <a href="https://green-for-sudan-about-us.netlify.app/">About Us</a>
+            <a href="journal.html" class="gfs-text-green">The Journal</a>
+        </nav>
+    </div>
+
     <main>
         <section class="pt-20 pb-20 text-white gradient-overlay-journal text-center">
             <div class="container mx-auto px-4">
-                <h1 class="text-3xl md:text-5xl font-extrabold mb-4">Green For Sudan: Science Journal</h1>
-                <p class="text-xl text-emerald-100">Empowering Sudanese Youth Voices for a Sustainable Future.</p>
+                <h1 class="text-3xl md:text-5xl font-extrabold mb-4 uppercase tracking-widest">Green For Sudan Journal</h1>
+                <p class="text-xl text-emerald-100 max-w-2xl mx-auto">A platform for Sudanese youth to lead the conversation on science and climate action.</p>
             </div>
         </section>
 
-        <section id="ai-author-tools" class="py-16 bg-white">
+        <section id="idea-generator" class="py-16 bg-white">
             <div class="container mx-auto px-4 max-w-4xl">
-                <div class="text-center mb-10">
-                    <h3 class="text-3xl font-extrabold gfs-text-green mb-2">Inspirational Topic Generator</h3>
-                    <p class="text-gray-600">Share your interest, and our AI will help you find a local Sudanese context to write about.</p>
-                </div>
-
-                <div class="bg-white border-2 border-emerald-100 rounded-3xl p-8 shadow-2xl">
-                    <div class="space-y-6">
+                <div class="bg-emerald-50 border-2 border-emerald-100 rounded-3xl p-8 shadow-xl">
+                    <h3 class="text-2xl font-bold gfs-text-green mb-6 flex items-center gap-2">
+                        <i data-lucide="sparkles"></i> Inspirational Article Idea Generator
+                    </h3>
+                    
+                    <div class="grid md:grid-cols-1 gap-6 mb-8">
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">1. Your Specialty</label>
-                            <input id="specialtyInput" type="text" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="e.g. Biology, Engineering, Economics">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">1. Your Specialty / Interests</label>
+                            <input id="specialtyInput" type="text" class="w-full p-4 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500" placeholder="e.g. Engineering, Biology, Social Sciences...">
                         </div>
-
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">2. Article Type</label>
-                            <select id="typeInput" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none">
-                                <option>Explainer Article</option>
-                                <option>Perspective / Opinion Piece</option>
+                            <label class="block text-sm font-bold text-gray-700 mb-2">2. Type of Article</label>
+                            <select id="typeInput" class="w-full p-4 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500">
+                                <option>Explainer / Digest Article</option>
+                                <option>Perspective / Point of View</option>
                                 <option>Case Study</option>
                                 <option>Interview</option>
                             </select>
                         </div>
-
                         <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-1">3. Challenge to Address</label>
-                            <input id="problemInput" type="text" class="w-full p-3 border rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none" placeholder="e.g. Nile pollution, solar energy in villages">
+                            <label class="block text-sm font-bold text-gray-700 mb-2">3. Climate Challenge You Care About</label>
+                            <input id="problemInput" type="text" class="w-full p-4 border rounded-xl outline-none focus:ring-2 focus:ring-emerald-500" placeholder="e.g. Floods in Khartoum, Desertification in North Sudan...">
                         </div>
-
-                        <button id="generateIdeaButton" class="llm-button w-full gfs-green text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-2">
-                            <i data-lucide="sparkles" class="w-5 h-5"></i>
-                            Generate 3 Inspirational Topics
-                        </button>
                     </div>
 
-                    <div class="mt-10 border-t pt-8">
-                        <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
-                            <i data-lucide="book-open" class="gfs-text-green"></i> Recommended for You:
-                        </h4>
-                        <div id="ideaOutput" class="min-h-[200px] p-6 bg-emerald-50 rounded-2xl text-gray-800 whitespace-pre-wrap leading-relaxed border border-emerald-100">
-                            <span class="text-gray-400 italic">Your personalized topics will appear here...</span>
-                        </div>
-                        <div id="ideaStatus" class="mt-4 text-center text-sm font-medium"></div>
+                    <button id="generateBtn" class="llm-button w-full gfs-green text-white font-bold py-4 rounded-xl shadow-lg flex items-center justify-center gap-3">
+                        <i data-lucide="lightbulb" class="w-5 h-5"></i> Generate Ideas
+                    </button>
+
+                    <div id="outputContainer" class="mt-10 hidden">
+                        <h4 class="font-bold text-gray-800 mb-4 border-b pb-2">Personalized Suggestions:</h4>
+                        <div id="ideaOutput" class="p-6 bg-white rounded-2xl border border-emerald-200 text-gray-800 leading-relaxed whitespace-pre-wrap"></div>
                     </div>
+                    <div id="statusMsg" class="mt-4 text-center text-sm font-medium"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 bg-gray-50">
+            <div class="container mx-auto px-4 max-w-4xl">
+                <h3 class="text-3xl font-bold mb-8 text-center">Submission Guidelines</h3>
+                <div class="space-y-4">
+                    <details class="group bg-white border rounded-xl p-4 shadow-sm">
+                        <summary class="font-bold cursor-pointer flex justify-between items-center">
+                            Aims & Scope
+                            <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                        </summary>
+                        <p class="mt-4 text-gray-600">We publish content that translates scientific concepts into accessible language for Sudanese communities, focusing on climate, water, and energy.</p>
+                    </details>
+                    
+                    <details class="group bg-white border rounded-xl p-4 shadow-sm">
+                        <summary class="font-bold cursor-pointer flex justify-between items-center">
+                            General Requirements
+                            <i data-lucide="chevron-down" class="group-open:rotate-180 transition"></i>
+                        </summary>
+                        <ul class="mt-4 text-gray-600 list-disc pl-5 space-y-2">
+                            <li>Must be original work.</li>
+                            <li>Language: Clear, grammatically correct English.</li>
+                            <li>Zero tolerance for plagiarism.</li>
+                        </ul>
+                    </details>
+                </div>
+                
+                <div class="mt-12 text-center">
+                    <a href="https://docs.google.com/forms/d/100R9NqWIV-3G2d5_JRWuYvu-OzuVuolwv1DxvqeGcx8/viewform" target="_blank" class="gfs-sand text-gray-900 font-extrabold py-4 px-10 rounded-xl shadow-lg inline-block hover:scale-105 transition">
+                        Submit Abstract (Google Form)
+                    </a>
                 </div>
             </div>
         </section>
     </main>
 
+    <footer class="bg-gray-800 text-white py-8 text-center text-sm">
+        <p>© 2025 Green For Sudan. Empowering the Next Generation.</p>
+    </footer>
+
     <script>
         lucide.createIcons();
 
-        // LOGIC FOR GENERATOR
-        const generateIdeaButton = document.getElementById('generateIdeaButton');
-        const ideaOutput = document.getElementById('ideaOutput');
-        const ideaStatus = document.getElementById('ideaStatus');
+        // Menu Logic
+        const menu = document.getElementById('mobile-menu');
+        document.getElementById('mobile-menu-toggle').onclick = () => menu.classList.add('active');
+        document.getElementById('mobile-menu-close').onclick = () => menu.classList.remove('active');
 
-        generateIdeaButton.addEventListener('click', async () => {
+        // Generator Logic
+        const generateBtn = document.getElementById('generateBtn');
+        const outputContainer = document.getElementById('outputContainer');
+        const ideaOutput = document.getElementById('ideaOutput');
+        const statusMsg = document.getElementById('statusMsg');
+
+        generateBtn.onclick = async () => {
             const specialty = document.getElementById('specialtyInput').value;
             const type = document.getElementById('typeInput').value;
             const problem = document.getElementById('problemInput').value;
 
-            if (!specialty || !problem) {
-                ideaStatus.innerText = "Please fill in all fields.";
-                ideaStatus.className = "mt-4 text-center text-sm font-medium text-red-500";
+            if(!specialty || !problem) {
+                statusMsg.innerText = "Please provide your specialty and a challenge.";
+                statusMsg.className = "mt-4 text-center text-sm font-medium text-red-500";
                 return;
             }
 
-            // UI State Loading
-            generateIdeaButton.disabled = true;
-            ideaStatus.innerText = "Consulting our editorial AI...";
-            ideaStatus.className = "mt-4 text-center text-sm font-medium text-emerald-600";
-            ideaOutput.innerText = "Thinking about Sudan's landscape...";
+            // Loading State
+            generateBtn.disabled = true;
+            statusMsg.innerText = "AI is thinking...";
+            statusMsg.className = "mt-4 text-center text-sm font-medium text-emerald-600";
+            outputContainer.classList.remove('hidden');
+            ideaOutput.innerText = "Generating ideas tailored to the Sudanese context...";
 
             try {
-                // This calls your Netlify function (Backend)
                 const response = await fetch('/.netlify/functions/generateIdea', {
                     method: 'POST',
                     body: JSON.stringify({
-                        systemPrompt: "You are a Sudanese environmental editor. Recommend EXACTLY 3 article topics based on the user's input. For each: 1. A bold title. 2. A description. 3. Why it is URGENT for Sudan. Be empathetic and professional.",
+                        systemPrompt: "You are a supportive Sudanese environmental editor. Recommend exactly 3 article topics. For each: 1. A Bold Title. 2. A description. 3. Why it is urgent for Sudan. Use local context.",
                         userQuery: `Specialty: ${specialty}, Type: ${type}, Problem: ${problem}`
                     })
                 });
 
                 const data = await response.json();
-                ideaOutput.innerText = data.text; // Displays the AI response
-                ideaStatus.innerText = "Done! We hope these inspire you.";
-            } catch (error) {
-                ideaOutput.innerText = "Connection error. Please try again.";
-                console.error(error);
+                ideaOutput.innerText = data.text;
+                statusMsg.innerText = "Generated successfully!";
+            } catch (err) {
+                ideaOutput.innerText = "Error connecting to AI. Please ensure your Netlify function is set up.";
+                statusMsg.innerText = "";
             } finally {
-                generateIdeaButton.disabled = false;
+                generateBtn.disabled = false;
             }
-        });
+        };
     </script>
 </body>
 </html>
